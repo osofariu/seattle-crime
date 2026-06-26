@@ -2,12 +2,25 @@
 
 A small data-science notebook that explores Seattle PD crime incidents **near any
 address**. You enter an address, it geocodes the location, filters every reported
-crime within a chosen radius, and renders a one-page dashboard — a crimes-per-year
-trend, plus top offense types, time of day, and an incident map shown side by side
-for the **past 10, 5, and 1 years** to surface how the local pattern is changing.
+crime within a chosen radius, and renders a one-page dashboard: a benchmark vs the
+citywide average, crimes per year (violent vs non-violent), gun-related incidents,
+top offenses with a multi-year trend, the time-of-day pattern, and
+proportional-symbol + density maps comparing the **past 5 years vs the past year**.
 
 Proximity is computed with exact great-circle (haversine) distance from the
 geocoded point, not coarse beat/neighborhood polygons.
+
+## Example output
+
+Two extremes, a busy downtown corner vs. a quiet residential block:
+
+**4th Ave & Pine St (Downtown)** — ~10× the citywide average for an area this size
+
+![Downtown dashboard for 4th Ave & Pine St](examples/downtown_4th_and_pine.png)
+
+**7001 24th Ave NW (Ballard)** — a quiet residential block
+
+![Ballard dashboard for 7001 24th Ave NW](examples/ballard_24th_ave_nw.png)
 
 ## Data
 
