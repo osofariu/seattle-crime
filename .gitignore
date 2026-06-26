@@ -1,0 +1,17 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data (raw ~400MB CSV is downloaded at runtime) and generated charts
+data/
+charts/
+
+# macOS
+.DS_Store
