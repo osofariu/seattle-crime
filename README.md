@@ -11,8 +11,8 @@ reported crime within a chosen radius, and renders:
 - the **time-of-day** pattern;
 - **location and density maps** comparing the past 5 years vs the past year.
 
-Proximity is computed with exact great-circle (haversine) distance from the
-geocoded point, not coarse beat/neighborhood polygons.
+For how each figure is computed — the benchmark, the per-year density, the trend
+windows — see [METHODOLOGY.md](METHODOLOGY.md).
 
 ## Example output
 
@@ -53,9 +53,11 @@ Or open `crime_stats.ipynb` directly in VS Code / Jupyter with the project's
 
 Run the cells top to bottom. The last cell prompts you for an address — type or
 paste a Seattle address and press Enter (blank = Space Needle). Set `RADIUS_MILES`
-in that cell to widen or narrow the area (default `0.5`). The dashboard renders
-inline and is saved to `charts/<address>.png`. To try another address, just re-run
-that last cell and enter a new one.
+in that cell to widen or narrow the area (default `0.5`). To try another address,
+just re-run that last cell and enter a new one.
+
+Each run renders the dashboard inline and also saves it to a `charts/<address>.png`
+file, so you build up a folder of locations you can compare side by side later.
 
 ## Reading the data
 
