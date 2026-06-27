@@ -47,7 +47,7 @@ typical Seattle area of the same size?*, assuming the city's overall incident de
 Both `N_local` and `N_city` are counted over the **same** time window, so the window
 cancels and the ratio is time-independent. Equivalently:
 
-```
+```text
 ratio = (N_local / N_city) · (S / A)
 ```
 
@@ -88,26 +88,39 @@ each hour is `count_in_hour / total × 100`. Each curve is smoothed with a cente
 does not spike the line. Plotting percentages — rather than counts — lets the two
 periods be compared despite very different totals.
 
+## A citywide anchor for the maps
+
+Both maps are scaled against a single **citywide reference rate**, `CITY_REF` — the
+99th-percentile per-block incident rate across the whole city (a "busy block,"
+~8 incidents/year). Because Seattle reports coordinates at block level, every incident
+at a block stacks onto one point, so a block's rate is a natural unit. Pinning both maps
+to this same anchor — identical for every address — is what makes them **comparable
+between dashboards**: a dense area like downtown saturates while a quiet block stays
+pale, instead of each address being rescaled to its own maximum.
+
+Both maps also use a **fixed box of ±`RADIUS_MILES`** around the address, so the spatial
+scale (and the density cell size) is identical on every dashboard.
+
 ## Location map (proportional symbols)
 
 Incidents are collapsed to **unique block points**; each point's rate is
-`count / period_years`. Marker **area** is proportional to that rate, scaled by a single
-maximum shared across both periods:
+`count / period_years`. Marker **area** is proportional to that rate, scaled against the
+citywide anchor and capped:
 
-```
-size = clip( rate / rate_max × 170 , min = 4 )
+```text
+size = clip( rate / CITY_REF × 110 , min = 3 , max = 190 )
 ```
 
-So a dot of a given size means the same incidents/year in either column, and area (not
-overplotted opacity) encodes how busy each spot is.
+So a dot of a given size means the same incidents/year on any dashboard; blocks at or
+above the busy-block rate render at (capped) full size.
 
 ## Density heatmap (incidents per year)
 
-A hexbin (grid size 40) over a fixed extent. Each incident contributes `1 / period_years`
-to its cell, summed, so every hexagon reads as **incidents per year**. Both periods share
-one color scale, and its maximum is **clipped at the 97th percentile** of all cell values
-so a single hotspot does not wash out everything else (the colorbar's arrow marks the
-clip). Cells with no incidents are left blank.
+A hexbin (grid size 40) over the fixed box. Each incident contributes `1 / period_years`
+to its cell, summed, so every hexagon reads as **incidents per year**. The color scale is
+pinned from 0 to `CITY_REF` — the same citywide anchor — so colors mean the same thing
+across dashboards. Cells above the anchor saturate (the colorbar's arrow marks the clip);
+empty cells are blank.
 
 ## Gun-related incidents
 
