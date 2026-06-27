@@ -25,6 +25,11 @@ computed with the haversine formula (Earth radius 3958.8 mi). Incidents within
 point-to-point distance centered on the address, not a coarse beat / neighborhood /
 precinct bucket.
 
+At this radius the choice of formula barely matters — a flat-plane (Pythagorean)
+distance would differ by inches. Haversine is just the standard, correct-by-default
+way to measure it, which also avoids hand-tuning a latitude correction (a degree of
+longitude covers less ground than a degree of latitude this far north).
+
 ## Benchmark — "N× the citywide average"
 
 The benchmark answers: *how does the incident count near this address compare to a
