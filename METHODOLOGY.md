@@ -35,11 +35,14 @@ longitude covers less ground than a degree of latitude this far north).
 The benchmark answers: *how does the incident count near this address compare to a
 typical Seattle area of the same size?*, assuming the city's overall incident density.
 
-- Circle area: `A = π · r²`
-- Citywide density: `N_city / S`, where `N_city = len(geo)` and `S` = Seattle land
-  area ≈ **83.8 mi²**
-- Expected count for an average circle this size: `E = (N_city / S) · A`
-- Ratio: `N_local / E`, where `N_local = len(nearby)`
+- `N_city` = total incidents citywide over the window — every row in `geo`
+  (after the date filter and coordinate cleanup described above).
+- `N_local` = incidents near the address — every row in `nearby` (within the radius).
+- Circle area: `A = π · r²` (e.g. ~0.79 mi² for a 0.5-mi radius).
+- `S` = Seattle land area ≈ **83.8 mi²**.
+- Citywide density: `N_city / S` (incidents per square mile).
+- Expected count for an average circle this size: `E = (N_city / S) · A`.
+- Ratio: `N_local / E`.
 
 Both `N_local` and `N_city` are counted over the **same** time window, so the window
 cancels and the ratio is time-independent. Equivalently:
