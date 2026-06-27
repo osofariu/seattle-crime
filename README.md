@@ -1,12 +1,15 @@
 # Seattle Crime — Proximity Analysis
 
 A notebook that builds a one-page dashboard of Seattle PD crime incidents **near
-any address**. It's an informal, exploratory tool, not a rigorous study. You enter
-an address, it geocodes the location, filters every reported crime within a chosen
-radius, and renders: a benchmark vs the citywide average, crimes per year (violent
-vs non-violent), gun-related incidents, top offenses with a multi-year trend, the
-time-of-day pattern, and proportional-symbol + density maps comparing the
-**past 5 years vs the past year**.
+any address**. You enter an address, it geocodes the location, filters every
+reported crime within a chosen radius, and renders:
+
+- a **benchmark** comparing the local rate to the citywide average for an area this size;
+- **crimes per year**, split violent vs non-violent;
+- **gun-related incidents** per year, by severity;
+- **top offenses**, with a multi-year trend;
+- the **time-of-day** pattern;
+- **location and density maps** comparing the past 5 years vs the past year.
 
 Proximity is computed with exact great-circle (haversine) distance from the
 geocoded point, not coarse beat/neighborhood polygons.
